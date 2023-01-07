@@ -1,0 +1,78 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+/[Ll]ibrary/*
+!/[Ll]ibrary/com.unity.addressables/
+/[Ll]ibrary/com.unity.addressables/*
+!/[Ll]ibrary/com.unity.addressables/aa/
+
+Captures/
+Build/
+Assets/_Gitignore/**
+!Assets/_Gitignore/README.txt
+Assets/StreamingAssets/assetBundle**
+ServerData/
+Assets/AddressableAssetsData/Android**
+Assets/AddressableAssetsData/iOS**
+
+# =============== #
+# VSCode
+# =============== #
+.vscode/
+
+# =============== #
+# Rider EAP #
+# =============== #
+/\.idea/
+Assets/Plugins/Editor/JetBrains**
+
+# =============== #
+# Doxygen generated #
+# =============== #
+
+DoxygenExports/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.csproj.meta
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+.vs/
+*.vscode/settings.json
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+*.mdpolicy
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ============ #
+# for others   #
+# ============ #
+Logs/
+
+*.log #log files, for some plugins
+*.pyc #python bytecode cache, for some plugins.
+sysinfo.txt #Unity3D Generated File On Crash Reports
+*.mdb_DISABLED*
+
+UserSettings
+ProjectSettings/RiderScriptEditorPersistedState.asset
