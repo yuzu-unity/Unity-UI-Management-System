@@ -14,7 +14,6 @@ namespace UnityNavigator
         UniTask SuspendAsync(CancellationToken cancellationToken = default);
 
         UniTask ResumeAsync(CancellationToken cancellationToken = default);
-        
     }
 
     /// <summary>

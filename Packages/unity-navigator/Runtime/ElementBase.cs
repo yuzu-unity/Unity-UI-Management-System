@@ -11,7 +11,6 @@ namespace UnityNavigator
 	public interface IElement: IContext
 	{
 		void Build(IContext context);
-		
 	}
 	
 	public abstract class ElementMonoBase: MonoBehaviour, IElement
