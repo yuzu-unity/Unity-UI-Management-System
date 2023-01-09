@@ -205,6 +205,18 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.yuzu.unity-navigator": {
+      "version": "file:unity-navigator",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "com.yuzu.unity-page-manager": {
+      "version": "file:unity-page-manager",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "jp.hadashikick.vcontainer": {
       "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer",
       "depth": 0,

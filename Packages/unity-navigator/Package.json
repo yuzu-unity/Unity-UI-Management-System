@@ -1,0 +1,18 @@
+{
+  "name": "com.yuzu.unity-navigator",
+  "version": "1.2.3",
+  "displayName": "UnityNavigator",
+  "description": "UnityNavigator",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "dependencies": {
+ },
+ "keywords": [
+    
+  ],
+  "author": {
+    "name": "yuzu-unity",
+    "email": "",
+    "url": ""
+  }
+}
