@@ -15,7 +15,6 @@ namespace UnityNavigator
 		IContext Parent { get; }
 
 		IContext Of<T>();
-
 	
 	}
 

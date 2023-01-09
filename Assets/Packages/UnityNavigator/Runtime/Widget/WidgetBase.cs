@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -6,13 +7,14 @@ using UnityEngine;
 
 namespace UnityNavigator
 {
-    public interface IWidget : IElement
+    public interface IWidget : IElement, IDisposable
     {
         UniTask InitializeAsync(CancellationToken cancellationToken);
 
         UniTask SuspendAsync(CancellationToken cancellationToken = default);
 
         UniTask ResumeAsync(CancellationToken cancellationToken = default);
+        
     }
 
     /// <summary>
@@ -20,10 +22,26 @@ namespace UnityNavigator
     /// </summary>
     public abstract class WidgetBase : ElementMonoBase, IWidget
     {
-        public abstract UniTask InitializeAsync(CancellationToken cancellationToken);
+        public virtual UniTask InitializeAsync(CancellationToken cancellationToken = default)
+        {
+            this.gameObject.SetActive(false);
+            return new UniTask();
+        }
 
-        public abstract UniTask SuspendAsync(CancellationToken cancellationToken = default);
+        public virtual UniTask SuspendAsync(CancellationToken cancellationToken = default)
+        {
+            this.gameObject.SetActive(false);
+            return new UniTask();
+        }
 
-        public abstract UniTask ResumeAsync(CancellationToken cancellationToken = default);
+        public virtual UniTask ResumeAsync(CancellationToken cancellationToken = default)
+        {
+            this.gameObject.SetActive(true);
+            return new UniTask();
+        }
+		
+        public virtual void Dispose()
+        {
+        }
     }
 }

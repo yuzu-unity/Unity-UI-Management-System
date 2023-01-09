@@ -2,9 +2,9 @@
     "name": "UnityNavigator",
     "rootNamespace": "",
     "references": [
-        "GUID:7d842eb096ba854468c979a5889df6c4",
         "GUID:560b04d1a97f54a4e82edc0cbbb69285",
-        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:7d842eb096ba854468c979a5889df6c4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

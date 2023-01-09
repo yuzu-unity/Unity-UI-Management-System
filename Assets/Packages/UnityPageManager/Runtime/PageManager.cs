@@ -5,14 +5,29 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityPageManager;
 
-namespace UnityNavigator
+namespace UnityPageManager
 {
-    public class WidgetManagerWidgetBase : WidgetBase ,IPageManager
-    {
 
-	    protected Transform _root => this.transform;
+	public interface IPageManager
+	{
+		UniTask PushAsync<T>(IPageProvider<T> provider,Action<T> setParameter = null, CancellationToken cancellationToken = default) where T : IPage;
+		
+		UniTask PopAsync(CancellationToken cancellationToken = default);
+		
+		UniTask ReplaceAsync<T>(IPageProvider<T> provider,Action<T> setParameter = null, CancellationToken cancellationToken = default)
+			where T : IPage;
+
+		UniTask ReplaceAllAsync<T>(IPageProvider<T> provider,Action<T> setParameter = null, CancellationToken cancellationToken = default)
+			where T : IPage;
+
+		UniTask RemoveAllAsync(CancellationToken cancellationToken = default);
+	}
+	
+
+	public abstract class PageManager : IPageManager , IDisposable
+	{
+		protected abstract Transform _root { get; }
 		
 		private readonly List<PageData> _pageList = new();
 
@@ -164,23 +179,5 @@ namespace UnityNavigator
 				page.Dispose();
 			}
 		}
-       
-        public override UniTask InitializeAsync(CancellationToken cancellationToken)
-        {
-	        return new UniTask();
-        }
-        
-
-        public override UniTask SuspendAsync(CancellationToken cancellationToken = default)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override UniTask ResumeAsync(CancellationToken cancellationToken = default)
-        {
-            throw new System.NotImplementedException();
-        }
-
-     
-    }
+	}
 }

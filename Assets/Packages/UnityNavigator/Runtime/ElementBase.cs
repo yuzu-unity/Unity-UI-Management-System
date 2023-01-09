@@ -14,6 +14,20 @@ namespace UnityNavigator
 	
 	public abstract class ElementMonoBase: MonoBehaviour, IElement
 	{
+		private Transform __cachedTransform;
+
+		protected Transform _cachedTransform
+		{
+			get
+			{
+				if (__cachedTransform == null)
+				{
+					__cachedTransform = transform;
+				}
+				return __cachedTransform;
+			}
+		}
+		
 		public IContext Parent { get; private set; }
 		
 		public IContext Of<T>()
@@ -35,6 +49,7 @@ namespace UnityNavigator
 		{
 			Parent = context;
 		}
+
 	}
 	
 	public abstract class ElementBase: IElement
