@@ -209,7 +209,9 @@
       "version": "file:unity-navigator",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "com.yuzu.unity-page-manager": "0.0.1"
+      }
     },
     "com.yuzu.unity-page-manager": {
       "version": "file:unity-page-manager",

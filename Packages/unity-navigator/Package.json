@@ -1,6 +1,6 @@
 {
   "name": "com.yuzu.unity-navigator",
-  "version": "1.2.3",
+  "version": "0.0.1",
   "displayName": "UnityNavigator",
   "description": "UnityNavigator\n\nhttps://github.com/yuzu-unity/Unity-UI-Management-System",
   "unity": "2019.1",
@@ -10,5 +10,8 @@
     "name": "yuzu-unity",
     "email": "",
     "url": ""
+  },
+  "dependencies": {
+    "com.yuzu.unity-page-manager": "0.0.1"
   }
 }
