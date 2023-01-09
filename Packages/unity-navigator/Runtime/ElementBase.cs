@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -30,16 +32,16 @@ namespace UnityNavigator
 		
 		public IContext Parent { get; private set; }
 		
-		public IContext Of<T>()
+		public T Of<T>() where T: IContext
 		{
 			if (Parent == null)
 			{
-				return null;
+				throw new Exception("Context Not Found");
 			}
 
-			if (Parent is T)
+			if (Parent is T parent)
 			{
-				return Parent;
+				return parent;
 			}
 
 			return Parent.Of<T>();
@@ -56,16 +58,16 @@ namespace UnityNavigator
 	{
 		public IContext Parent { get; private set; }
 		
-		public IContext Of<T>()
+		public T Of<T>() where T: IContext
 		{
 			if (Parent == null)
 			{
-				return null;
+				throw new Exception("Context Not Found");
 			}
 
-			if (Parent is T)
+			if (Parent is T parent)
 			{
-				return Parent;
+				return parent;
 			}
 
 			return Parent.Of<T>();
