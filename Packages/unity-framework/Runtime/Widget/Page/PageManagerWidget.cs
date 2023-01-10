@@ -34,7 +34,7 @@ namespace UnityFramework
             CancellationToken cancellationToken = default);
     }
     
-    public class PageManagerWidgetBase : WidgetBase ,IPageManagerWidget
+    public class PageManagerWidget : WidgetBase ,IPageManagerWidget
     {
         private IPageManager _pageManager;
 
@@ -48,10 +48,9 @@ namespace UnityFramework
             return null;
         }
 
-
         public override  UniTask InitializeAsync(CancellationToken cancellationToken = default)
         {
-            _pageManager = new WidgetPageManager(_cachedTransform);
+            _pageManager = new PageManager(_cachedTransform);
             return new UniTask();
         }
 
@@ -128,14 +127,5 @@ namespace UnityFramework
                 setParameter?.Invoke((IPageWidget)x);
             }, cancellationToken);
         }
-    }
-
-    public sealed class WidgetPageManager : PageManager
-    {
-        public WidgetPageManager(Transform root)
-        {
-            _root = root;
-        }
-        protected override Transform _root { get; }
     }
 }

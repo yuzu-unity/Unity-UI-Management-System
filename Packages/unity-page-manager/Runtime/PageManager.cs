@@ -26,9 +26,14 @@ namespace UnityPageManager
 	}
 	
 
-	public abstract class PageManager : IPageManager , IDisposable
+	public sealed class PageManager : IPageManager , IDisposable
 	{
-		protected abstract Transform _root { get; }
+		public PageManager(Transform root)
+		{
+			_root = root;
+		}
+		
+		private Transform _root;
 		
 		private readonly List<PageData> _pageList = new();
 
@@ -39,7 +44,7 @@ namespace UnityPageManager
 		/// <param name="setParameter"></param>Inject処理やパラメータ入力
 		/// <param name="cancellationToken"></param>
 		/// <typeparam name="T"></typeparam>
-		public virtual async UniTask PushAsync(IPageProvider provider,Action<IPage> setParameter = null,
+		public async UniTask PushAsync(IPageProvider provider,Action<IPage> setParameter = null,
 			CancellationToken cancellationToken = default)
 		{
 			var lastPage = _pageList.LastOrDefault();
@@ -61,7 +66,7 @@ namespace UnityPageManager
 		/// Pop
 		/// </summary>
 		/// <param name="cancellationToken"></param>
-		public virtual async UniTask PopAsync(CancellationToken cancellationToken = default)
+		public async UniTask PopAsync(CancellationToken cancellationToken = default)
 		{
 			var count = _pageList.Count;
 			if (count <= 0)
@@ -91,7 +96,7 @@ namespace UnityPageManager
 		/// <param name="setParameter"></param>Inject処理やパラメータ入力
 		/// <param name="cancellationToken"></param>
 		/// <typeparam name="T"></typeparam>
-		public virtual async UniTask ReplaceAsync(IPageProvider provider,Action<IPage> setParameter = null,
+		public async UniTask ReplaceAsync(IPageProvider provider,Action<IPage> setParameter = null,
 			CancellationToken cancellationToken = default)
 		{
 			var lastPage = _pageList.LastOrDefault();
@@ -123,7 +128,7 @@ namespace UnityPageManager
 		/// <param name="setParameter"></param>Inject処理やパラメータ入力
 		/// <param name="cancellationToken"></param>
 		/// <typeparam name="T"></typeparam>
-		public virtual async UniTask ReplaceAllAsync(IPageProvider provider,Action<IPage> setParameter = null,
+		public async UniTask ReplaceAllAsync(IPageProvider provider,Action<IPage> setParameter = null,
 			CancellationToken cancellationToken = default)
 		{
 			var lastPage = _pageList.LastOrDefault();
@@ -156,7 +161,7 @@ namespace UnityPageManager
 		/// RemoveAll
 		/// </summary>
 		/// <param name="cancellationToken"></param>
-		public virtual async UniTask RemoveAllAsync(CancellationToken cancellationToken = default)
+		public async UniTask RemoveAllAsync(CancellationToken cancellationToken = default)
 		{
 			var lastPage = _pageList.LastOrDefault();
 
@@ -173,7 +178,7 @@ namespace UnityPageManager
 			_pageList.Clear();
 		}
 
-		public virtual void Dispose()
+		public void Dispose()
 		{
 			foreach (var page in _pageList)
 			{
