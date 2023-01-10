@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityPageManager;
 
-namespace UnityNavigator
+namespace UnityFramework
 {
     public class PageCanvasWidget : WidgetCanvasBase ,IPage
     {

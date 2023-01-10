@@ -205,8 +205,8 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.yuzu.unity-navigator": {
-      "version": "file:unity-navigator",
+    "com.yuzu.unity-framework": {
+      "version": "file:unity-framework",
       "depth": 0,
       "source": "embedded",
       "dependencies": {

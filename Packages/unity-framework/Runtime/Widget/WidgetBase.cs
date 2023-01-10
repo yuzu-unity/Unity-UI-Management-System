@@ -5,9 +5,9 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace UnityNavigator
+namespace UnityFramework
 {
-    public interface IWidget : IElement, IDisposable
+    public interface IWidget : IElement
     {
         UniTask InitializeAsync(CancellationToken cancellationToken);
 
@@ -37,10 +37,6 @@ namespace UnityNavigator
         {
             this.gameObject.SetActive(true);
             return new UniTask();
-        }
-		
-        public virtual void Dispose()
-        {
         }
     }
 }

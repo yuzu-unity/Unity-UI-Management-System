@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityNavigator
+namespace UnityFramework
 {
-	public class Navigator
+	public class ContextManager
 	{
-		public Navigator(IContext context)
+		public ContextManager(IContext context)
 		{
 			RootContext = context;
 		}

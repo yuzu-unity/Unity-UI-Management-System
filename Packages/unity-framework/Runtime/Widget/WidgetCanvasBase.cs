@@ -4,7 +4,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace UnityNavigator
+namespace UnityFramework
 {
 	
 	[RequireComponent(typeof(CanvasGroup))]

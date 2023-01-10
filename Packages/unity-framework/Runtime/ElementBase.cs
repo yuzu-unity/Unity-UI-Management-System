@@ -6,9 +6,9 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace UnityNavigator
+namespace UnityFramework
 {
-	public interface IElement: IContext
+	public interface IElement: IContext,IDisposable
 	{
 		void Build(IContext context);
 	}
@@ -31,50 +31,47 @@ namespace UnityNavigator
 		
 		public IContext Parent { get; private set; }
 		
-		public T Of<T>() where T: IContext
-		{
-			if (Parent == null)
-			{
-				throw new Exception("Context Not Found");
-			}
+		public List<IContext> Children { get; } = new List<IContext>();
 
-			if (Parent is T parent)
-			{
-				return parent;
-			}
-
-			return Parent.Of<T>();
-		}
-		
 		public void Build(IContext context)
 		{
 			Parent = context;
+			Parent?.Children.Add(this);
 		}
 
+		public void Dispose()
+		{
+			Parent?.Children.Remove(this);
+			DisposeImpl();
+		}
+
+		protected virtual void DisposeImpl()
+		{
+			
+		}
 	}
 	
 	public abstract class ElementBase: IElement
 	{
 		public IContext Parent { get; private set; }
-		
-		public T Of<T>() where T: IContext
-		{
-			if (Parent == null)
-			{
-				throw new Exception("Context Not Found");
-			}
+		public List<IContext> Children { get; } = new List<IContext>();
 
-			if (Parent is T parent)
-			{
-				return parent;
-			}
-
-			return Parent.Of<T>();
-		}
 		
 		public void Build(IContext context)
 		{
 			Parent = context;
+			Parent?.Children.Add(this);
+		}
+
+		public void Dispose()
+		{
+			Parent?.Children.Remove(this);
+			DisposeImpl();
+		}
+
+		protected virtual void DisposeImpl()
+		{
+			
 		}
 	}
 }

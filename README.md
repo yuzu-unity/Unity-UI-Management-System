@@ -10,4 +10,4 @@ https://github.com/yuzu-unity/Unity-UI-Management-System.git?path=Packages/unity
 
 add package from git URL...
 
-https://github.com/yuzu-unity/Unity-UI-Management-System.git?path=Packages/unity-navigator
+https://github.com/yuzu-unity/Unity-UI-Management-System.git?path=Packages/unity-framework
