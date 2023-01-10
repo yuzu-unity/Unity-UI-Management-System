@@ -45,9 +45,4 @@ namespace UnityPageManager
         UniTask<PageData> LoadPageAsync(Transform root,CancellationToken cancellationToken = default);
         
     }
-
-    public interface IPageProvider<T>:IPageProvider
-    {
-        
-    }
 }

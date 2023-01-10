@@ -5,7 +5,12 @@ using UnityPageManager;
 
 namespace UnityFramework
 {
-    public class PageWidget : WidgetCanvasBase ,IPage
+    public interface IPageWidget : IWidget, IPage
+    {
+        
+    }
+    
+    public class PageWidget : WidgetCanvasBase ,IPageWidget
     {
         /// <summary>
         /// Pageのフックは型で

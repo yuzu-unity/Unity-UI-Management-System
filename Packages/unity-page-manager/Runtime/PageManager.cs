@@ -11,15 +11,16 @@ namespace UnityPageManager
 
 	public interface IPageManager
 	{
-		UniTask PushAsync<T>(IPageProvider<T> provider,Action<T> setParameter = null, CancellationToken cancellationToken = default) where T : IPage;
+		UniTask PushAsync(IPageProvider provider, Action<IPage> setParameter = null,
+			CancellationToken cancellationToken = default);
 		
 		UniTask PopAsync(CancellationToken cancellationToken = default);
-		
-		UniTask ReplaceAsync<T>(IPageProvider<T> provider,Action<T> setParameter = null, CancellationToken cancellationToken = default)
-			where T : IPage;
 
-		UniTask ReplaceAllAsync<T>(IPageProvider<T> provider,Action<T> setParameter = null, CancellationToken cancellationToken = default)
-			where T : IPage;
+		UniTask ReplaceAsync(IPageProvider provider, Action<IPage> setParameter = null,
+			CancellationToken cancellationToken = default);
+
+		UniTask ReplaceAllAsync(IPageProvider provider, Action<IPage> setParameter = null,
+			CancellationToken cancellationToken = default);
 
 		UniTask RemoveAllAsync(CancellationToken cancellationToken = default);
 	}
@@ -38,8 +39,8 @@ namespace UnityPageManager
 		/// <param name="setParameter"></param>Inject処理やパラメータ入力
 		/// <param name="cancellationToken"></param>
 		/// <typeparam name="T"></typeparam>
-		public virtual async UniTask PushAsync<T>(IPageProvider<T> provider,Action<T> setParameter = null,
-			CancellationToken cancellationToken = default) where T : IPage
+		public virtual async UniTask PushAsync(IPageProvider provider,Action<IPage> setParameter = null,
+			CancellationToken cancellationToken = default)
 		{
 			var lastPage = _pageList.LastOrDefault();
 			if (lastPage.Page != null)
@@ -48,7 +49,7 @@ namespace UnityPageManager
 			}
 
 			var newPage = await provider.LoadPageAsync(_root, cancellationToken);
-			setParameter?.Invoke((T)newPage.Page);
+			setParameter?.Invoke(newPage.Page);
 			await newPage.Page.InitializeAsync(cancellationToken);
 			await newPage.Page.ResumeAsync(cancellationToken);
 
@@ -90,8 +91,8 @@ namespace UnityPageManager
 		/// <param name="setParameter"></param>Inject処理やパラメータ入力
 		/// <param name="cancellationToken"></param>
 		/// <typeparam name="T"></typeparam>
-		public virtual async UniTask ReplaceAsync<T>(IPageProvider<T> provider,Action<T> setParameter = null,
-			CancellationToken cancellationToken = default) where T : IPage
+		public virtual async UniTask ReplaceAsync(IPageProvider provider,Action<IPage> setParameter = null,
+			CancellationToken cancellationToken = default)
 		{
 			var lastPage = _pageList.LastOrDefault();
 
@@ -101,7 +102,7 @@ namespace UnityPageManager
 			}
 
 			var newPage = await provider.LoadPageAsync(_root,cancellationToken);
-			setParameter?.Invoke((T)newPage.Page);
+			setParameter?.Invoke(newPage.Page);
 			await newPage.Page.InitializeAsync(cancellationToken);
 			await newPage.Page.ResumeAsync(cancellationToken);
 
@@ -122,8 +123,8 @@ namespace UnityPageManager
 		/// <param name="setParameter"></param>Inject処理やパラメータ入力
 		/// <param name="cancellationToken"></param>
 		/// <typeparam name="T"></typeparam>
-		public virtual async UniTask ReplaceAllAsync<T>(IPageProvider<T> provider,Action<T> setParameter = null,
-			CancellationToken cancellationToken = default) where T : IPage
+		public virtual async UniTask ReplaceAllAsync(IPageProvider provider,Action<IPage> setParameter = null,
+			CancellationToken cancellationToken = default)
 		{
 			var lastPage = _pageList.LastOrDefault();
 
@@ -133,7 +134,7 @@ namespace UnityPageManager
 			}
 
 			var newPage = await provider.LoadPageAsync(_root,cancellationToken);
-			setParameter?.Invoke((T)newPage.Page);
+			setParameter?.Invoke(newPage.Page);
 			await newPage.Page.InitializeAsync(cancellationToken);
 			await newPage.Page.ResumeAsync(cancellationToken);
 
