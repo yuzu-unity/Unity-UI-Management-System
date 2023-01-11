@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace UnityFramework
 {
-	public interface IContext
+	public interface IContext:IDisposable
 	{
 		void Build(IContext context);
 

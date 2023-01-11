@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace UnityFramework
 {
-	public interface IElement: IContext,IDisposable
+	public interface IElement: IContext
 	{
 	}
 	
@@ -39,13 +39,27 @@ namespace UnityFramework
 			Parent = context;
 			Parent?.Children.Add(this);
 		}
-		
 
 		public virtual void Dispose()
 		{
-			Parent?.Children.Remove(this);
+			foreach (var child in Children)
+			{
+				child.Dispose();
+			}
+			
+			if (Parent != null)
+			{
+				if (Parent.Children.Contains(this))
+				{
+					Parent.Children.Remove(this);
+				}
+			}
 		}
 
+		protected virtual void OnDestroy()
+		{
+			Dispose();
+		}
 	}
 	
 	public abstract class ElementBase: IElement
@@ -63,7 +77,18 @@ namespace UnityFramework
 
 		public virtual void Dispose()
 		{
-			Parent?.Children.Remove(this);
+			foreach (var child in Children)
+			{
+				child.Dispose();
+			}
+			
+			if (Parent != null)
+			{
+				if (Parent.Children.Contains(this))
+				{
+					Parent.Children.Remove(this);
+				}
+			}
 		}
 
 	}
