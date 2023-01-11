@@ -26,7 +26,7 @@ namespace UnityPageManager
 	}
 	
 
-	public sealed class PageManager : IPageManager , IDisposable
+	public class PageManager : IPageManager , IDisposable
 	{
 		public PageManager(Transform root)
 		{
