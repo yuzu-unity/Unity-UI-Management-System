@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 namespace UnityPageManager
 {
 
-    public abstract class PageResourcesProviderBase<T> : IPageProvider<T> where T : IPage
+    public abstract class PageResourcesProviderBase<T> : IPageProvider where T : IPage
     {
         protected abstract string _rootPath { get; }
 
@@ -29,7 +29,7 @@ namespace UnityPageManager
         }
     }
     
-    public abstract class PageScriptableObjectProviderBase<T,TScriptableObject> : IPageProvider<T> where T : IPage where TScriptableObject:PageScriptableObject<TScriptableObject>
+    public abstract class PageScriptableObjectProviderBase<T,TScriptableObject> : IPageProvider where T : IPage where TScriptableObject:PageScriptableObject<TScriptableObject>
     {
         /// <summary>
         /// 基本はInstanceをStaticで取得
@@ -51,7 +51,7 @@ namespace UnityPageManager
         }
     }
     
-    public abstract class PageAddressableProviderBase<T> : IPageProvider<T> where T : IPage
+    public abstract class PageAddressableProviderBase<T> : IPageProvider where T : IPage
     {
         protected abstract string _rootPath { get; }
         
