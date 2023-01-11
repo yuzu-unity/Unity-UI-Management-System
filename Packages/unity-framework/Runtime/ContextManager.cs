@@ -4,7 +4,12 @@ using UnityEngine;
 
 namespace UnityFramework
 {
-	public class ContextManager
+	public interface IContextManager
+	{
+		IContext RootContext { get; }
+	}
+	
+	public class ContextManager : IContextManager
 	{
 		public ContextManager(IContext context)
 		{
