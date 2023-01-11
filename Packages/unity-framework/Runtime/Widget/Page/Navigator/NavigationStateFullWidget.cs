@@ -9,7 +9,7 @@ using UnityPageManager;
 
 namespace UnityFramework
 {
-    public interface IPageManagerWidget: IWidget
+    public interface INavigationStateFullWidget: IStateFullWidget
     {
         
         UniTask PopAsync(CancellationToken cancellationToken = default);
@@ -34,7 +34,7 @@ namespace UnityFramework
             CancellationToken cancellationToken = default);
     }
     
-    public class PageManagerWidget : WidgetBase ,IPageManagerWidget
+    public class NavigationStateFullWidget : StateFullWidget ,INavigationStateFullWidget
     {
         private IPageManager _pageManager;
 

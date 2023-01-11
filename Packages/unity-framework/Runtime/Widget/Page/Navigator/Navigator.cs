@@ -8,7 +8,7 @@ namespace UnityFramework
 {
     public static class Navigator 
     {
-	    public static IPageManagerWidget Of(IContext context)
+	    public static INavigationStateFullWidget Of(IContext context)
 	    {
 
 		    var c = context;
@@ -16,7 +16,7 @@ namespace UnityFramework
 		    while (c.Parent != null)
 		    {
 
-			    if (c.Parent is IPageManagerWidget result)
+			    if (c.Parent is INavigationStateFullWidget result)
 			    {
 				    return result;
 			    }

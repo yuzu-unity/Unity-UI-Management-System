@@ -1,31 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityPageManager;
-using System.Linq;
 
 namespace UnityFramework
 {
-    public abstract class ScaffoldWidget : NavigationStateFullWidget
+    public abstract class MaterialAppWidget : NavigationStateFullWidget
     {
-        protected virtual IWidget AppBar=> null;
-        protected virtual IWidget Body => null;
-        protected virtual IWidget BottomNavigationBar => null;
-        protected virtual IWidget FloatingActionButton => null;
+        protected virtual IWidget Main => null;
         
         private IEnumerable<IWidget> ChildrenWidgets => Children.OfType<IWidget>();
 
 
         protected override void BuildImpl()
         {
-            AppBar?.Build(this);
-            Body?.Build(this);
-            BottomNavigationBar?.Build(this);
-            FloatingActionButton?.Build(this);
+            Main.Build(this);
         }
-
+        
         public override async UniTask InitializeAsync(CancellationToken cancellationToken = default)
         {
             await base.InitializeAsync(cancellationToken);
