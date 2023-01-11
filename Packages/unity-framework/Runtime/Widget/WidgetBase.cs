@@ -10,10 +10,6 @@ namespace UnityFramework
     public interface IWidget : IElement
     {
         UniTask InitializeAsync(CancellationToken cancellationToken);
-
-        UniTask SuspendAsync(CancellationToken cancellationToken = default);
-
-        UniTask ResumeAsync(CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -23,20 +19,9 @@ namespace UnityFramework
     {
         public virtual UniTask InitializeAsync(CancellationToken cancellationToken = default)
         {
-            this.gameObject.SetActive(false);
-            return new UniTask();
-        }
-
-        public virtual UniTask SuspendAsync(CancellationToken cancellationToken = default)
-        {
-            this.gameObject.SetActive(false);
-            return new UniTask();
-        }
-
-        public virtual UniTask ResumeAsync(CancellationToken cancellationToken = default)
-        {
             this.gameObject.SetActive(true);
             return new UniTask();
         }
+        
     }
 }

@@ -10,7 +10,6 @@ namespace UnityFramework
 {
 	public interface IElement: IContext,IDisposable
 	{
-		void Build(IContext context);
 	}
 	
 	public abstract class ElementMonoBase: MonoBehaviour, IElement
@@ -33,28 +32,20 @@ namespace UnityFramework
 		
 		public List<IContext> Children { get; } = new List<IContext>();
 
-		public void Build(IContext context)
+		public virtual void Build(IContext context)
 		{
+			Children.Clear();
+			
 			Parent = context;
 			Parent?.Children.Add(this);
-			BuildImpl();
 		}
 		
-		protected virtual void BuildImpl()
-		{
-			
-		}
 
-		public void Dispose()
+		public virtual void Dispose()
 		{
 			Parent?.Children.Remove(this);
-			DisposeImpl();
 		}
 
-		protected virtual void DisposeImpl()
-		{
-			
-		}
 	}
 	
 	public abstract class ElementBase: IElement
@@ -63,21 +54,17 @@ namespace UnityFramework
 		public List<IContext> Children { get; } = new List<IContext>();
 
 		
-		public void Build(IContext context)
+		public virtual void Build(IContext context)
 		{
+			Children.Clear();
 			Parent = context;
 			Parent?.Children.Add(this);
 		}
 
-		public void Dispose()
+		public virtual void Dispose()
 		{
 			Parent?.Children.Remove(this);
-			DisposeImpl();
 		}
 
-		protected virtual void DisposeImpl()
-		{
-			
-		}
 	}
 }

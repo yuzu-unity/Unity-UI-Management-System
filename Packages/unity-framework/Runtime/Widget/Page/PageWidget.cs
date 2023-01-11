@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityPageManager;
 
@@ -7,10 +9,11 @@ namespace UnityFramework
 {
     public interface IPageWidget : IWidget, IPage
     {
-        
+      
     }
     
-    public class PageWidget : WidgetCanvasBase ,IPageWidget
+    [RequireComponent(typeof(CanvasGroup))]
+    public class PageWidget : WidgetBase ,IPageWidget
     {
         /// <summary>
         /// Pageのフックは型で
@@ -18,6 +21,26 @@ namespace UnityFramework
         protected virtual void OnValidate()
         {
             gameObject.name = GetType().ToString();
+        }
+
+        public override UniTask InitializeAsync(CancellationToken cancellationToken = default)
+        {
+            this.gameObject.SetActive(false);
+            return new UniTask();
+        }
+      
+        public UniTask SuspendAsync(CancellationToken cancellationToken = default)
+        {
+            this.gameObject.SetActive(false);
+
+            return new UniTask();
+
+        }
+      
+        public UniTask ResumeAsync(CancellationToken cancellationToken = default)
+        {
+            this.gameObject.SetActive(true);
+            return new UniTask();
         }
     }
 }

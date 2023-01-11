@@ -54,16 +54,6 @@ namespace UnityFramework
             return new UniTask();
         }
 
-        public override UniTask SuspendAsync(CancellationToken cancellationToken = default)
-        {
-            return new UniTask();
-        }
-
-        public override UniTask ResumeAsync(CancellationToken cancellationToken = default)
-        {
-            return new UniTask();
-        }
-        
         public UniTask PopAsync(CancellationToken cancellationToken = default)
         {
             return _pageManager.PopAsync(cancellationToken);
