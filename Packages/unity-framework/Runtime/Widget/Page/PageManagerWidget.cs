@@ -45,7 +45,7 @@ namespace UnityFramework
         
         protected virtual IPageProvider GetProviderFromRoute(string route)
         {
-            return null;
+            throw new NullReferenceException();
         }
 
         public override  UniTask InitializeAsync(CancellationToken cancellationToken = default)

@@ -37,6 +37,12 @@ namespace UnityFramework
 		{
 			Parent = context;
 			Parent?.Children.Add(this);
+			BuildImpl();
+		}
+		
+		protected virtual void BuildImpl()
+		{
+			
 		}
 
 		public void Dispose()
