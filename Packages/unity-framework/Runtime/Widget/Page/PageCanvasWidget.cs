@@ -32,6 +32,8 @@ namespace UnityFramework
                 return __canvasGroup;
             }
         }
+        
+        public override bool AutoBuildInitialize => false;
       
         [SerializeField]
         protected bool _suspendHide = false;

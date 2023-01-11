@@ -39,11 +39,35 @@ namespace UnityFramework
         private IPageManager _pageManager;
 
         private string _currentRoute;
-
         public string CurrentRoute => _currentRoute;
 
+        public override void InitState()
+        {
+            base.InitState();
+            
+            if (!string.IsNullOrEmpty(CurrentRoute))
+            {
+                ReplaceAllNamedAsync(CurrentRoute).Forget();
+            }
+        }
         
-        protected virtual IPageProvider GetProviderFromRoute(string route)
+        private IPageProvider GetProviderFromRoute(string route)
+        {
+            if (!string.IsNullOrEmpty(CurrentRoute))
+            {
+                throw new Exception("遷移先にRouteが空文字は非対応　RemoveAllを使用してください");
+            }
+
+            return GetProviderFromRouteImpl(route);
+        }
+        
+        /// <summary>
+        /// Routeを扱う場合はoverwrite route
+        /// </summary>
+        /// <param name="route"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        protected virtual IPageProvider GetProviderFromRouteImpl(string route)
         {
             throw new NullReferenceException();
         }

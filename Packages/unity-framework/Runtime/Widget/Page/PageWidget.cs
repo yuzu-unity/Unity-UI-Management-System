@@ -23,6 +23,8 @@ namespace UnityFramework
             gameObject.name = GetType().ToString();
         }
 
+        public override bool AutoBuildInitialize => false;
+
         public override UniTask InitializeAsync(CancellationToken cancellationToken = default)
         {
             this.gameObject.SetActive(false);
