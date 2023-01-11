@@ -8,7 +8,7 @@ using UnityPageManager;
 namespace UnityFramework
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class PageCanvasWidget : WidgetBase ,IPage
+    public class PageCanvasWidget : WidgetBase ,IPageWidget
     {
         /// <summary>
         /// Pageのフックは型で
