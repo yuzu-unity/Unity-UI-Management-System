@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -77,9 +78,9 @@ namespace UnityFramework
 
 		public virtual void Dispose()
 		{
-			foreach (var child in Children)
+			while (Children.Any())
 			{
-				child.Dispose();
+				Children.First()?.Dispose();
 			}
 			
 			if (Parent != null)
