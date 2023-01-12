@@ -1,6 +1,6 @@
 {
   "name": "com.yuzu.unity-framework",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "displayName": "UnityFramework",
   "description": "UnityFrameWork\n\nhttps://github.com/yuzu-unity/Unity-UI-Management-System",
   "unity": "2019.1",
