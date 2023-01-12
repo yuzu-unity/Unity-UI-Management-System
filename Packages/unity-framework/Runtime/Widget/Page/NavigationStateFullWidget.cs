@@ -45,6 +45,8 @@ namespace UnityFramework
         {
             base.InitState();
             
+            _pageManager = new PageManager(_cachedTransform);
+
             if (!string.IsNullOrEmpty(CurrentRoute))
             {
                 ReplaceAllNamedAsync(CurrentRoute).Forget();
@@ -70,12 +72,6 @@ namespace UnityFramework
         protected virtual IPageProvider GetProviderFromRouteImpl(string route)
         {
             throw new NullReferenceException();
-        }
-
-        public override  UniTask InitializeAsync(CancellationToken cancellationToken = default)
-        {
-            _pageManager = new PageManager(_cachedTransform);
-            return new UniTask();
         }
 
         public UniTask PopAsync(CancellationToken cancellationToken = default)

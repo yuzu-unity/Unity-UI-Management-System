@@ -25,15 +25,10 @@ namespace UnityFramework
 
         protected abstract IPageProvider GetProvider(int state);
         
-        public override  UniTask InitializeAsync(CancellationToken cancellationToken = default)
-        {
-            _pageManager = new PageManager(_cachedTransform);
-            return new UniTask();
-        }
-
         public override void InitState()
         {
             base.InitState();
+            _pageManager = new PageManager(_cachedTransform);
             SetStateAsync(_state.Value).Forget();
         }
 
