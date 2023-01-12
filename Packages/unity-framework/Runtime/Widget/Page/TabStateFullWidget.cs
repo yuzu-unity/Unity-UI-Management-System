@@ -29,7 +29,7 @@ namespace UnityFramework
         {
             base.InitState();
             _pageManager = new PageManager(_cachedTransform);
-            SetStateAsync(_state.Value).Forget();
+            SetStateAsync(_state.Value,cancellationToken:this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         public UniTask SetStateAsync(int state, Action<IPageWidget> setParameter = null, CancellationToken cancellationToken = default)
