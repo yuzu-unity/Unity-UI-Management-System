@@ -12,7 +12,6 @@ namespace UnityFramework
       
     }
     
-    [RequireComponent(typeof(CanvasGroup))]
     public class PageWidget : WidgetBase ,IPageWidget
     {
         /// <summary>
