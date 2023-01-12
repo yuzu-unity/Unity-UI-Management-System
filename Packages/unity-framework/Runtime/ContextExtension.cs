@@ -6,9 +6,9 @@ using UnityPageManager;
 
 namespace UnityFramework
 {
-    public static class Navigator 
+    public static class ContextExtension
     {
-	    public static INavigationStateFullWidget Of(IContext context)
+	    public static T Of<T>(this IContext context)
 	    {
 
 		    var c = context;
@@ -16,7 +16,7 @@ namespace UnityFramework
 		    while (c.Parent != null)
 		    {
 
-			    if (c.Parent is INavigationStateFullWidget result)
+			    if (c.Parent is T result)
 			    {
 				    return result;
 			    }
@@ -24,7 +24,7 @@ namespace UnityFramework
 			    c = c.Parent;
 		    }
 
-		    return null;
+		    throw new NullReferenceException();
 	    }
     }
 }
