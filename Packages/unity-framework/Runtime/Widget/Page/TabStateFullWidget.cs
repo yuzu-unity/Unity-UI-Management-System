@@ -23,7 +23,7 @@ namespace UnityFramework
 
         private IPageManager _pageManager;
 
-        protected abstract IPageProvider[] GetProvider { get; }
+        protected abstract IPageProvider[] GetProviders { get; }
         
         public override  UniTask InitializeAsync(CancellationToken cancellationToken = default)
         {
@@ -39,7 +39,7 @@ namespace UnityFramework
 
         public UniTask SetStateAsync(int state, Action<IPageWidget> setParameter = null, CancellationToken cancellationToken = default)
         {
-            var provider = GetProvider[state];
+            var provider = GetProviders[state];
             return _pageManager.PushAsync(provider, (x)=>
             {
                 setParameter?.Invoke((IPageWidget)x);
