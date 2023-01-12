@@ -43,9 +43,9 @@ namespace UnityFramework
 
 		public virtual void Dispose()
 		{
-			foreach (var child in Children)
+			while (Children.Any())
 			{
-				child.Dispose();
+				Children.First()?.Dispose();
 			}
 			
 			if (Parent != null)
