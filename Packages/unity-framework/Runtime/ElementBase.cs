@@ -41,7 +41,7 @@ namespace UnityFramework
 			Parent?.Children.Add(this);
 		}
 
-		public virtual void Dispose()
+		protected virtual void DisposeImpl()
 		{
 			while (Children.Any())
 			{
@@ -56,10 +56,19 @@ namespace UnityFramework
 				}
 			}
 		}
+		
+		public virtual void Dispose()
+		{
+			DisposeImpl();
+			Destroy(this);
+		}
 
+		/// <summary>
+		/// シーン移動時などDestroy時も同様に処理をしておく(ライフサイクル考慮)
+		/// </summary>
 		protected virtual void OnDestroy()
 		{
-			Dispose();
+			DisposeImpl();
 		}
 	}
 	

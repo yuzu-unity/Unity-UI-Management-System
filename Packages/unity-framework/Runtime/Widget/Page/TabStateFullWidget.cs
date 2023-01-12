@@ -35,7 +35,7 @@ namespace UnityFramework
         public UniTask SetStateAsync(int state, Action<IPageWidget> setParameter = null, CancellationToken cancellationToken = default)
         {
             var provider = GetProvider(state);
-            return _pageManager.PushAsync(provider, (x)=>
+            return _pageManager.ReplaceAllAsync(provider, (x)=>
             {
                 setParameter?.Invoke((IPageWidget)x);
             }, cancellationToken);

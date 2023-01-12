@@ -30,12 +30,22 @@ namespace UnityPageManager
 	{
 		public PageManager(Transform root)
 		{
+			if (root == null)
+			{
+				throw new NullReferenceException();
+			}
 			_root = root;
+			_destroyCancellationToken = _root.GetCancellationTokenOnDestroy();
 		}
 		
 		private Transform _root;
 		
 		private readonly List<PageData> _pageList = new();
+
+		private CancellationToken _destroyCancellationToken;
+
+		private CancellationToken CreateToken(CancellationToken cancellationToken) => CancellationTokenSource
+			.CreateLinkedTokenSource(_destroyCancellationToken, cancellationToken).Token;
 
 		/// <summary>
 		/// Push
@@ -47,16 +57,18 @@ namespace UnityPageManager
 		public async UniTask PushAsync(IPageProvider provider,Action<IPage> setParameter = null,
 			CancellationToken cancellationToken = default)
 		{
+			var token = CreateToken(cancellationToken);
+			
 			var lastPage = _pageList.LastOrDefault();
 			if (lastPage.Page != null)
 			{
-				await lastPage.Page.SuspendAsync(cancellationToken);
+				await lastPage.Page.SuspendAsync(token);
 			}
 
-			var newPage = await provider.LoadPageAsync(_root, cancellationToken);
+			var newPage = await provider.LoadPageAsync(_root, token);
 			setParameter?.Invoke(newPage.Page);
-			await newPage.Page.InitializeAsync(cancellationToken);
-			await newPage.Page.ResumeAsync(cancellationToken);
+			await newPage.Page.InitializeAsync(token);
+			await newPage.Page.ResumeAsync(token);
 
 			_pageList.Add(newPage);
 		}
@@ -68,6 +80,9 @@ namespace UnityPageManager
 		/// <param name="cancellationToken"></param>
 		public async UniTask PopAsync(CancellationToken cancellationToken = default)
 		{
+			var token = CreateToken(cancellationToken);
+
+			
 			var count = _pageList.Count;
 			if (count <= 0)
 			{
@@ -77,13 +92,13 @@ namespace UnityPageManager
 			var lastPage = _pageList[^1];
 			if (lastPage.Page != null)
 			{
-				await lastPage.Page.SuspendAsync(cancellationToken);
+				await lastPage.Page.SuspendAsync(token);
 				lastPage.Dispose();
 			}
 
 			if (_pageList.Count > 1)
 			{
-				await _pageList[^2].Page.ResumeAsync(cancellationToken);
+				await _pageList[^2].Page.ResumeAsync(token);
 			}
 
 			_pageList.Remove(lastPage);
@@ -99,17 +114,19 @@ namespace UnityPageManager
 		public async UniTask ReplaceAsync(IPageProvider provider,Action<IPage> setParameter = null,
 			CancellationToken cancellationToken = default)
 		{
+			var token = CreateToken(cancellationToken);
+
 			var lastPage = _pageList.LastOrDefault();
 
 			if (lastPage.Page != null)
 			{
-				await lastPage.Page.SuspendAsync(cancellationToken);
+				await lastPage.Page.SuspendAsync(token);
 			}
 
-			var newPage = await provider.LoadPageAsync(_root,cancellationToken);
+			var newPage = await provider.LoadPageAsync(_root,token);
 			setParameter?.Invoke(newPage.Page);
-			await newPage.Page.InitializeAsync(cancellationToken);
-			await newPage.Page.ResumeAsync(cancellationToken);
+			await newPage.Page.InitializeAsync(token);
+			await newPage.Page.ResumeAsync(token);
 
 			if (lastPage.Page != null)
 			{
@@ -131,17 +148,19 @@ namespace UnityPageManager
 		public async UniTask ReplaceAllAsync(IPageProvider provider,Action<IPage> setParameter = null,
 			CancellationToken cancellationToken = default)
 		{
+			var token = CreateToken(cancellationToken);
+
 			var lastPage = _pageList.LastOrDefault();
 
 			if (lastPage.Page != null)
 			{
-				await lastPage.Page.SuspendAsync(cancellationToken);
+				await lastPage.Page.SuspendAsync(token);
 			}
 
-			var newPage = await provider.LoadPageAsync(_root,cancellationToken);
+			var newPage = await provider.LoadPageAsync(_root,token);
 			setParameter?.Invoke(newPage.Page);
-			await newPage.Page.InitializeAsync(cancellationToken);
-			await newPage.Page.ResumeAsync(cancellationToken);
+			await newPage.Page.InitializeAsync(token);
+			await newPage.Page.ResumeAsync(token);
 
 
 			foreach (var page in _pageList)
@@ -163,11 +182,13 @@ namespace UnityPageManager
 		/// <param name="cancellationToken"></param>
 		public async UniTask RemoveAllAsync(CancellationToken cancellationToken = default)
 		{
+			var token = CreateToken(cancellationToken);
+
 			var lastPage = _pageList.LastOrDefault();
 
 			if (lastPage.Page != null)
 			{
-				await lastPage.Page.SuspendAsync(cancellationToken);
+				await lastPage.Page.SuspendAsync(token);
 			}
 
 			foreach (var page in _pageList)
