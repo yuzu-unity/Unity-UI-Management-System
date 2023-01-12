@@ -11,18 +11,10 @@ namespace UnityFramework
     {
         protected virtual IWidget Main => null;
         
-        private IEnumerable<IWidget> ChildrenWidgets => Children.OfType<IWidget>();
-
         public override void Build(IContext context)
         {
             base.Build(context);
             Main.Build(this);
-        }
-
-        public override async UniTask InitializeAsync(CancellationToken cancellationToken = default)
-        {
-            await base.InitializeAsync(cancellationToken);
-            await ChildrenWidgets.Select(x=>x.InitializeAsync(cancellationToken));
         }
     }
 }

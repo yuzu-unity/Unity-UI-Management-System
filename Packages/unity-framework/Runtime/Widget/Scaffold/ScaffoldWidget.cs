@@ -13,7 +13,6 @@ namespace UnityFramework
         protected virtual IWidget Bottom => null;
         protected virtual IWidget FloatingActionButton => null;
         
-        private IEnumerable<IWidget> ChildrenWidgets => Children.OfType<IWidget>();
 
         public override void Build(IContext context)
         {
@@ -22,12 +21,6 @@ namespace UnityFramework
             Body?.Build(this);
             Bottom?.Build(this);
             FloatingActionButton?.Build(this);
-        }
-
-        public override async UniTask InitializeAsync(CancellationToken cancellationToken = default)
-        {
-            await base.InitializeAsync(cancellationToken);
-            await ChildrenWidgets.Select(x=>x.InitializeAsync(cancellationToken));
         }
     }
 }
