@@ -137,5 +137,11 @@ namespace UnityFramework
                 setParameter?.Invoke((IPageWidget)x);
             }, cancellationToken);
         }
+
+        protected override void DisposeImpl()
+        {
+            _pageManager?.Dispose();
+            base.DisposeImpl();
+        }
     }
 }

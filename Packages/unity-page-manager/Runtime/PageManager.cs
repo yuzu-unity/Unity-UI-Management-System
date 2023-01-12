@@ -9,7 +9,7 @@ using UnityEngine;
 namespace UnityPageManager
 {
 
-	public interface IPageManager
+	public interface IPageManager: IDisposable
 	{
 		UniTask PushAsync(IPageProvider provider, Action<IPage> setParameter = null,
 			CancellationToken cancellationToken = default);
@@ -205,6 +205,7 @@ namespace UnityPageManager
 			{
 				page.Dispose();
 			}
+			_pageList.Clear();
 		}
 	}
 }
