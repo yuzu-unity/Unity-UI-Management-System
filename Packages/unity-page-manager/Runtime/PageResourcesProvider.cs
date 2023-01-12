@@ -60,16 +60,27 @@ namespace UnityPageManager
         {
             var path = _rootPath + typeof(T);
             var handle = Addressables.InstantiateAsync(path, root, false, false);
-            var instance = await handle.ToUniTask(cancellationToken: cancellationToken);
-            var page = instance.GetComponent<T>();
-            var dispose= Disposable.Create(() =>
+            try
+            {
+                var instance = await handle.ToUniTask(cancellationToken: cancellationToken);
+                var page = instance.GetComponent<T>();
+                var dispose= Disposable.Create(() =>
+                {
+                    if (handle.IsValid())
+                    {
+                        Addressables.Release(handle);
+                    }
+                });
+                return new PageData(page,dispose);
+            }
+            catch (OperationCanceledException)
             {
                 if (handle.IsValid())
                 {
                     Addressables.Release(handle);
                 }
-            });
-            return new PageData(page,dispose);
+                throw;
+            }
         }
     }
 
