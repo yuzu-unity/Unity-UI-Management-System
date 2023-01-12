@@ -76,6 +76,7 @@ namespace UnityPageManager
 		{
 			_canvasGroupCancellationTokenSource?.Cancel();
 			_canvasGroupCancellationTokenSource?.Dispose();
+			base.Dispose();
 		}
 
 	}

@@ -34,6 +34,7 @@ namespace UnityPageManager
 		
 		public virtual void Dispose()
 		{
+			Destroy(this);
 		}
 	}
 }
