@@ -18,7 +18,7 @@ namespace UnityFramework
     
     public abstract class TabStateFullWidget : StateFullWidget,ITabStateFullWidget
     {
-        private readonly IntReactiveProperty _state = new IntReactiveProperty();
+        protected readonly IntReactiveProperty _state = new IntReactiveProperty();
         public IReadOnlyReactiveProperty<int> State => _state;
 
         private IPageManager _pageManager;

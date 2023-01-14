@@ -38,7 +38,7 @@ namespace UnityFramework
     {
         private IPageManager _pageManager;
 
-        private string _currentRoute;
+        protected string _currentRoute;
         public string CurrentRoute => _currentRoute;
 
         public override void InitState()
